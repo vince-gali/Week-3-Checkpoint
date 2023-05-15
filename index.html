@@ -19,116 +19,136 @@
   <header>
     <nav class="navbar navbar-dark navbar-expand bg-dark text-light no-select">
       <a class="navbar-brand ms-3" href="#">
-        <img src="https://codeworks.blob.core.windows.net/public/assets/img/cw-mark.png" height="45" alt=""
-          loading="lazy">
-        <span class="ms-2">Week-3-Checkpoint</span>
+        <!-- <img src="https://codeworks.blob.core.windows.net/public/assets/img/cw-mark.png" height="45" alt="" -->
+        <!-- loading="lazy"> -->
+        <span class="ms-2">J O T</span>
       </a>
-    </nav>
-    <div>
-      <button onclick="app.userController.enterUserName()">login</button>
+      <div class="text-end">
+      <button type="submit" class="" onclick="app.userController.enterUserName(generateId)">login</button>
     </div>
+
+    </nav>
+   
   </header>
-  <main>
-
-
-
-
-    <!-- SECTION NOTES LIST HERE -->
-<!-- 
-    <section class="row col-12">
-      <div class="col-4">
-
-
-      </div>
-    </section> -->
+  <main class="bg-dark">
 
 
 
     
-    <!-- <form onsubmit="app.notesController.createNote()">
-      <div class="modal-body container-fluid">
-        <section class="row">
-          <div class="mb-3 col-6">
-            <label for="make" class="form-label">Car Make</label>
-            <input required minlength="3" maxlength="20" type="text" class="form-control" id="make" name="make"
-              placeholder="Car Make">
-          </div>
-          <div class="mb-3 col-6">
-            <label for="model" class="form-label">Car Model</label>
-            <input required minlength="3" maxlength="20" type="text" class="form-control" id="model" name="model"
-              placeholder="Car Model">
-          </div>
-          <div class="mb-3 col-6">
-            <label for="year" class="form-label">Car Year</label>
-            <input required min="1920" type="number" class="form-control" id="year" name="year"  placeholder="Car Year">
-          </div>
-          
-        
-          
-        </section>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Create Listing</button>
-      </div>
-    </form> -->
 
-    <!-- <section class="row">
-      <h1>Create Note</h1>
-    </section> -->
+
+<section class="row d-flex">
+  <!-- <div class="col-4 p-3">
+    <div class="card" id="notes">
+      <h3>${this.title}</h3>
+      <p>Created: ${this.ComputeDate}</p>
+    </div>
+  </div> -->
+<!-- 
+  <div class="text-end">
+    <button>My Jots</button>
+  </div>
+
+  <div class="col-8 p-3">
+    <div class="card p-4" onclick="app.notesController.setActive('${this.id}')">
+
+      <div class="" id="notes">
+        <h3>${this.title}</h3>
+        <p>Created: ${this.ComputeDate}</p>
+
+        <textarea onclick="app.notesController.unlockNote()" class="w-100" name="noteBody" id="noteBody" cols="30"
+          rows="10"></textarea>
+
+        <button class="btn btn-danger text-end" onclick="app.notesController.deleteNote('${this.id}')"> <i
+            class="mdi mdi-delete"></i>Delete Note</button>
+
+        <button class="btn btn-success w-25 my-1" type="submit" onclick="app.notesController.saveNote()">
+          <i class="mdi mdi-file"></i>Save Note
+        </button>
+      </div>
+    </div> -->
+</section>
+
+
+
+
+
 
 
     <!-- SECTION ADD NOTES TEMPLATE -->
-    <section.row class="col-12" id="createNote">
-      <div id="notesButton">
-      <form action="" onsubmit="app.notesController.createNote()">
-        <div class="row modal-body container-fluid">
-          <section>
 
-          </section>
-            <input class="form-control my-1" type="text" name="title" value="title">
-            <button class="btn btn-success w-75 my-1" type="submit">
+    <section id="createNote">
+      <!-- <form action="" onsubmit="app.notesController.createNote()">
+        <div class="row modal-body container-fluid">
+          <div data-bs-target="#modal">
+            <input class="form-control my-1" type="text" name="title" value="Note Title">
+            <button class="btn btn-success w-75 my-1" type="submit" onclick="app.notesController.getNoteTemplate()">
               <i class="mdi mdi-plus"></i>Create Note
             </button>
-          </form>
-        </div>
+          </div>
+      </form> -->
+    </section>
+    
+
+
+
+   
+  
+    
+<section class="row" >
+  <div id="list">
+    <!-- <div>
+      <div class="card">
+        <h3>Note 1</h3>
+        <p>Created:</p>
+        <p>Description:</p>
       </div>
-        <!-- <div>
-          <div class="card">
-            <h3>Note 1</h3>
-            <p>Created:</p>
-            <p>Description:</p>
-          </div>
-          <div class="card">
-            <h3>Note 2</h3>
-            <p>Created:</p>
-            <p>Description:</p>
-          </div>
-        </div>
-    </section.row>
+      <div class="card">
+        <h3>Note 2</h3>
+        <p>Created:</p>
+        <p>Description:</p>
+      </div>
+    </div> -->
+  </div>
+  </section.row>
 
 
     <section class="row col-12 d-flex flex-row justify-content-center">
 
       <!-- SECTION NOTES TEMPLATE -->
-      <div class="" id="notes">
-<!-- 
-      <div class="card col-md-4" id="notes">
-        <h3>Notes Title here</h3>
-        <p>creation date</p>
-        <p>words / characters </p>
-          <textarea class="w-100" name="noteBody" id="noteBody" cols="30" rows="10">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae accusantium distinctio error explicabo sint quam, facilis perferendis autem iste libero voluptatibus. Ut sit temporibus optio mollitia id, provident animi eius.</textarea>
-      </div>
-      <div>
-        <button class="btn btn-danger"> <i class="mdi mdi-delete"></i> </button>
-      </div>
-    </div> -->
+<div id="notes" >
+  
+  <!-- <div class="col-6 card">
+    <h3>Note 1</h3>
+    <p>Created:</p>
+    <p>Description:</p>
+  </div> -->
+
+  <!-- <div class="card col-md-4">
+    <h3>Notes Title here</h3>
+    <p>creation date</p>
+    <p>words / characters </p>
+  
+    <textarea class="w-100" name="noteBody" id="noteBody" cols="30"
+      rows="10">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae accusantium distinctio error explicabo sint quam, facilis perferendis autem iste libero voluptatibus. Ut sit temporibus optio mollitia id, provident animi eius.</textarea>
+  </div>
+
+  <div>
+    
+  </div> -->
+
+ 
+  
+
+</div>
+
 
 
     </section>
-     
-      
-    
+
+       
+
+
 
 
 
@@ -142,7 +162,7 @@
   </main>
   <footer class="bg-dark text-light">
     <div class="text-center no-select">
-      <p><small>Made with 💖 by CodeWorks</small></p>
+      <p><small></small></p>
     </div>
   </footer>
 

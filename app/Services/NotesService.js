@@ -1,10 +1,17 @@
 import { appState } from "../AppState.js"
 import { Note } from "../Models/Note.js"
 import { saveState } from "../Utils/Store.js";
+import { setHTML } from "../Utils/Writer.js";
 
 function _saveNotes(){
     saveState('notes', appState.notes)
 }
+
+
+// function _drawCreateNoteButton(){
+//     let note = appState.activeNote
+//     setHTML('notesButton', Note.NoteTemplate)
+// }
 
 class NotesService{
     createNote(formData) {
@@ -12,11 +19,25 @@ class NotesService{
         console.log('newNote', newNote);
         appState.notes.push(newNote)
         _saveNotes()
+        appState.activeNote = newNote
         appState.emit('notes')
 
 
-        appState.activeNote = newNote
 
+    }
+
+    unlockNote(){
+        let foundNote = appState.activeNote
+        appState.emit('activeNote')
+    }
+
+
+    saveNote(noteBody){
+        let activeNote = appState.activeNote
+        // @ts-ignore
+        activeNote.noteBody = noteBody
+        appState.emit('activeNote')
+        _saveNotes()
     }
 
     deleteNote(noteId){
@@ -27,35 +48,14 @@ class NotesService{
     }
 
 
-
-    // saveNote(noteBody){
-    //     let active
-
-    // }
-
-
     setActive(noteId){
         let foundNote = appState.notes.find(n => n.id == noteId)
-        console.log(foundNote);
+        // console.log(foundNote);
+        appState.activeNote = foundNote
     }
 
 
-    // setActive(noteId){
-    //     let foundNote = appState.find(n => n.id == noteId)
-    //     appState.activeNote = foundNote
-
-    // }
-
-
-    // unlockNote(){
-    //     let foundNote = appState.activeNote
-    //     foundCase.unlocked = !foundNote.unlocked
-    //     appState.emit('activeNote')
-    // }
 }
-
-
-
 
 
 

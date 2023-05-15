@@ -2,113 +2,91 @@ import { generateId } from "../Utils/generateId.js";
 import { appState } from "../AppState.js";
 
 
-
 export class Note{
-    static CreateNoteButton(arg0, CreateNoteButton) {
-        throw new Error("Method not implemented.");
-    }
-    constructor(data){
+
+
+      constructor(data){
         this.id = data.id || generateId()
         this.title = data.title
-        this.noteBody = data.noteBody || 'Start Typing Notes'
-        // this.clearance = data.clearance
+        this.noteBody = data.noteBody || 'Jot something here...'
         this.userName = data.userName
-        this.date = data.date ? new Date(data.data) : new Date()
-        // this.unlocked = false
+        this.date = data.date ? new Date(data.date) : new Date()
+        // this.ime = data.time ? new Time(data.Time) : new Time()
+        
     }
 
-    // get CardTemplate(){
-    //     return `
-    //     <div class="card col-md-4" id="notes">
-    //     <h3>${this.title}</h3>
-    //     <p>${this.date}</p>
-    //     <p>words / characters </p>
-    //       <textarea class="w-100" name="noteBody" id="noteBody" cols="30" rows="10">${this.noteBody}</textarea>
-    //   </div>
-    //   <div>
-    //     <button class="btn btn-danger"> <i class="mdi mdi-delete"></i> </button>
-    //   </div>
-    //     `
-    // }
+    
 
-
-    get CreateNoteButton(){
+    static CreateNoteButton(){
       return `
-      <div id="createNote">
       <form action="" onsubmit="app.notesController.createNote()">
-      <div class="row modal-body container-fluid">
-        <section>
+        <div class="row modal-body container-fluid p-3">
+          <div data-bs-target="">
+          
+            <input required minlength="3" maxlength="15" class="form-control  w-25 " type="text" name="title" value="Title">
 
-        </section>
-          <input class="form-control my-1" type="text" name="title" value="title">
-          <button ${appState.userName != '' ? '': 'disabled'} class="btn btn-success w-75 my-1" type="submit">
-            <i class="mdi mdi-plus"></i>Create Note
-          </button>
-        </form>
-      </div>
-      </div>
+            <label for="exampleColorInput" class="form-label">Color picker</label>
+            <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#563d7c" title="Choose your color">
+
+            <button class="btn btn-success w-25 my-1" type="submit" onclick="app.notesController.NoteTemplate()">
+              <i class="mdi mdi-plus"></i>Create Note
+            </button>
+            
+          </div>
+      </form>
+      ` 
+    }
+
+    get CreateNoteList(){
+      return `
+<div>
+      <div class="col-4 p-3" onclick="app.notesController.setActive('${this.id}')">
+    <div class="card" id="notes">
+      <h3>${this.title}</h3>
+      <p>Created: ${this.ComputeDate}</p>
+    </div>
+    </div>
       `
     }
+
+ 
+
+
 
 
     get NoteTemplate(){
         return `
-      
-         <div class="col-md-4" id="notes">
-         <h3>${this.title}</h3>
-         <p>${this.date}</p>
-       
-       </div>
 
-       <div class="col-8" onclick= "app.notesController.setActive('${this.id}')">
-          <textarea class="w-100" name="noteBody" id="noteBody" cols="30" rows="10">${this.noteBody}</textarea>
-       </div>
-       <div>
-         <button class="btn btn-danger" onclick="app.notesController.deleteNote('${this.id}')"> <i class="mdi mdi-delete"></i>Delete Note </button>
-      </div>
-      
+        <section class="row d-flex">
 
-        `
+
+
+        <div class="col-10 p-3">
+
+        <div class="text-end">
+          <button onclick="app.notesController.getNotes()">My Jots</button>
+        </div>
+          <div class="card p-4" >
+
+         
+      
+            <div class="" id="notes">
+              <h3>${this.title}</h3>
+              <p>Created: ${this.ComputeDate}</p>
+      
+              <textarea  class="w-100 noteBody" name="noteBody" value="" id="noteBody" cols="30"
+                rows="10">${this.noteBody}</textarea>
+      
+              <button class="btn btn-danger text-end" onclick="app.notesController.deleteNote('${this.id}')"> <i
+                  class="mdi mdi-delete"></i>Delete Note</button>
+      
+              <button class="btn btn-success w-25 my-1" type="submit" onclick="app.notesController.saveNotes()">
+                <i class="mdi mdi-file"></i>Save Note
+              </button>
+            </div>
+          </div>
+      </section>`
     }
-
-    // NoteForm(){
-    //     return `
-    //     <div class="row" id="createNote">
-    //       <form action="" onsubmit="app.notesController.createNote()">
-    //     <input class="form-control my-1" type="text" name="text" value="Note Title">
-    //         <button class="btn btn-success w-75 my-1" type="submit"  onclick="app.noteController.createNote()">
-    //           <i class="mdi mdi-plus"></i>Create Note
-    //         </button>
-    //       </form>
-    //     </div>
-    //     `
-        
-    // }
-
-
-    // SECTION get function below is similar to get CasesTemplate
-    get NoteViewTemplate(){
-      return `
-      <div class="d-flex justify-content-between" onclick="app.notesController.setActive('${this.id}')">
-        <p> ${this.ComputeTitle}</p>
-        <p> ${this.ComputeDate}</p>
-      </div>
-
-      
-      `
-    }
-
-
-
-
-
-    // get RedactedNoteTemplate(){
-    //     return `
-        
-    //     `
-    // }
-
-
 
 
 
@@ -121,7 +99,7 @@ export class Note{
     }
 
     get ComputeTitle(){
-        return (this.noteBody.slice(0,15) + '....')
+        return (this.noteBody.slice(0,5) + '....')
     }
 
 

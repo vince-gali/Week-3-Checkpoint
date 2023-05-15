@@ -10,13 +10,16 @@ class AppState extends EventEmitter {
 
 
   /** @type {import('./Models/Note.js').Note[]} */
-  notes = []
+  // notes = []
 
+  notes = loadState('notes', [Note])
 
   // /**@type {import('.Models/Note.js').Note|null} */
 activeNote = null
 
-  notes = loadState('notes', [Note])
+// noteBody = null
+
+  // notes = loadState('notes', [Note])
 
 // password = {
 //   '😎' : 'Vince'

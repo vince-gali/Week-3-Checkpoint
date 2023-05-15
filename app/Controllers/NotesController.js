@@ -4,57 +4,59 @@ import { getFormData } from "../Utils/FormHandler.js"
 import { notesService } from "../Services/NotesService.js"
 import { Note } from "../Models/Note.js"
 import { Pop } from "../Utils/Pop.js"
-// import { Pop } from "../Utils/Writer.js"
+// import { Pop } from "../Utils/Writer.js" 
 
-
-// function _drawCreateNoteButton(){
-//     setHTML('createNote', Note.CreateNoteButton())
-// }
 
 function _drawNote(){
     console.log('drawing note')
     let notes = appState.notes
     let template = ''
-    notes.forEach(note => template += note.NoteTemplate)
+    let filterNotes = notes.filter(n => n.userName += appState.userName)
+    filterNotes.forEach(n => template += n.CreateNoteList)
+    // notes.forEach(note => template += note.NoteTemplate)
     setHTML('notes', template)
 }
 
 
 function _drawActiveNote(){
-    // notes.forEach(note => template += note.NoteTemplate)
-
-
-    // let activeNote = appState.activeNote
-    // let note = appState.activeNote
-    // setHTML('', note.NoteTemplate)
-
+    let activeNote = appState.activeNote
+    // if (appState.userName == this.userName)
+    setHTML('notes', activeNote.NoteTemplate)
 }
+
+// function _drawActive(){
+//     console.log('drawing active')
+//     let note = appState.activeNote
+//     setHTML('notes', Note.NoteTemplate)
+// }
+
+// function _drawCreateNoteButton(){
+//     setHTML('createNote', Note.CreateNoteButton())
+// }
 
 function _drawCreateNoteButton(){
     setHTML('createNote', Note.CreateNoteButton())
 }
 
 
-
-
-
-
 export class NotesController {
     constructor(){
         // console.log('hello from the controller')
-        // _drawCreateNoteButton()
-        // appState.on('activeNote', _drawActive)
-        // CreateNoteButton()
-        
-        appState.on('activeNote', _drawActiveNote)
+        appState.on('userName', _drawCreateNoteButton)
         appState.on('notes', _drawNote)
         appState.on('activeNote', _drawActiveNote)
-        
     }
 
-    // getNotes(){
-    //     _drawNote()
-    // }
+    saveNotes(){
+        let note = document.getElementById('noteBody')
+        let noteBody = note.value
+        notesService.saveNote(noteBody)
+    }
+
+    getNotes(){
+        _drawNote()
+    }
+
 
 
     createNote(){
@@ -69,7 +71,6 @@ export class NotesController {
         // console.log(formData);
         notesService.createNote(formData)
         formHTML.reset()
-        
     }
 
     async deleteNote(noteId){
@@ -79,14 +80,23 @@ export class NotesController {
         }
     }
 
+    myNotes(){
+        // console.log('going to my notes');
+        
+    }
+
+
+    unlockNote(){
+        notesService.unlockNote()
+    }
+
 
 
 
     setActive(noteId){
-        console.log('setting the active case', noteId)
+        console.log('setting the active note', noteId)
         notesService.setActive(noteId)
-        // document.querySelector('.noteBody').focus()
-        // notesService.setActive(noteId)
+        // debugger
     }
 
 

@@ -4,7 +4,7 @@ import { Pop } from "../Utils/Pop.js"
 export class UserController {
     constructor(){
         // console.log('hello from the user controller')
-        
+        this.enterUserName()
     }
 
     async enterUserName(){
