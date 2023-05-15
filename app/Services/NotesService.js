@@ -19,8 +19,13 @@ class NotesService{
         console.log('newNote', newNote);
         appState.notes.push(newNote)
         _saveNotes()
+        // @ts-ignore
         appState.activeNote = newNote
         appState.emit('notes')
+        // console.log('total notes', appState.notes.length);
+        
+        
+        
 
 
 
@@ -51,8 +56,14 @@ class NotesService{
     setActive(noteId){
         let foundNote = appState.notes.find(n => n.id == noteId)
         // console.log(foundNote);
+        // @ts-ignore
         appState.activeNote = foundNote
     }
+
+    // drawTotal()
+
+
+
 
 
 }

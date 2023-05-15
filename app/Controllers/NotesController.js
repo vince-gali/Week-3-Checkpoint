@@ -8,13 +8,17 @@ import { Pop } from "../Utils/Pop.js"
 
 
 function _drawNote(){
-    console.log('drawing note')
+    // console.log('drawing note')
     let notes = appState.notes
     let template = ''
     let filterNotes = notes.filter(n => n.userName += appState.userName)
     filterNotes.forEach(n => template += n.CreateNoteList)
+    console.log('total notes', filterNotes.length);
     // notes.forEach(note => template += note.NoteTemplate)
     setHTML('notes', template)
+    setHTML('total', filterNotes.length)
+    
+    
 }
 
 
@@ -24,18 +28,24 @@ function _drawActiveNote(){
     setHTML('notes', activeNote.NoteTemplate)
 }
 
-// function _drawActive(){
-//     console.log('drawing active')
-//     let note = appState.activeNote
-//     setHTML('notes', Note.NoteTemplate)
-// }
 
-// function _drawCreateNoteButton(){
-//     setHTML('createNote', Note.CreateNoteButton())
-// }
 
 function _drawCreateNoteButton(){
     setHTML('createNote', Note.CreateNoteButton())
+}
+
+function _drawTotal(){
+    let total = appState.notes.length
+}
+
+function _drawNoteList(){
+    let notes = appState.notes
+    let template = ''
+    let filterNotes = notes.filter(n => n.userName += appState.userName)
+    // filterNotes.length(n => template += n.CreateNoteList)
+    filterNotes.forEach(n => template += n.CreateNoteList)
+    setHTML('notes', template)
+    setHTML('total', filterNotes.length)
 }
 
 
@@ -43,7 +53,10 @@ export class NotesController {
     constructor(){
         // console.log('hello from the controller')
         appState.on('userName', _drawCreateNoteButton)
+        // TODO double check redacted, right now we aren't drawing the note list until we create a new note
+        appState.on('userName', _drawNoteList)
         appState.on('notes', _drawNote)
+        // appState.on('notes', _drawTotal)
         appState.on('activeNote', _drawActiveNote)
     }
 
@@ -57,6 +70,10 @@ export class NotesController {
         _drawNote()
     }
 
+    getTotal(){
+        _drawTotal()
+    }
+
 
 
     createNote(){
@@ -67,10 +84,12 @@ export class NotesController {
         // console.log('this is an onsubmit event', formHTML.title.value)
         const formData = getFormData(formHTML)
         // // console.log('this is my formatted object')
+        // @ts-ignore
         formData.userName = appState.userName
         // console.log(formData);
         notesService.createNote(formData)
         formHTML.reset()
+        // this.quantity++
     }
 
     async deleteNote(noteId){
@@ -98,16 +117,6 @@ export class NotesController {
         notesService.setActive(noteId)
         // debugger
     }
-
-
-    
-
-
-    
-    
-
-   
-    
 
 
 

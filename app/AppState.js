@@ -27,6 +27,15 @@ activeNote = null
 
 userName = ''
 
+// colors = {
+//   '🟦' : 'blue'
+//   '🟥' : 'red'
+//   '🟨' : 'yellow'
+//   '🟩' : 'green'
+//   '🟪' : 'purple'
+
+// }
+
 
 }
 
